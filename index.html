@@ -138,13 +138,13 @@
             margin: 15px 0;
         }
 
-        /* Pulsating Jim & Pam message */
+        /* Pulsating Jim & Pam */
         #jimPamMessage {
             display: none;
             font-size: 24px;
             color: #e63946;
             font-weight: 600;
-            animation: pulse 1.5s infinite;
+            animation: fadeIn 1s forwards, pulse 1.5s infinite 1s;
         }
 
         @keyframes pulse {
@@ -166,6 +166,7 @@
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
+            opacity: 0;
         }
 
         .spotify-iframe {
@@ -181,6 +182,15 @@
             font-size: 28px;
             color: #e63946;
             margin-top: 20px;
+            opacity: 0;
+        }
+
+        .disclaimer {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+            text-align: center;
+            opacity: 0;
         }
     </style>
 </head>
@@ -207,27 +217,28 @@
 
             <p id="storyMessage" class="fade-in" style="display:none;">
                 You’ve always been my safe place, my laugh, and my forever.<br>
-                We got engaged last December, and this is our first Valentine’s together.<br>
+                Our first Valentine’s together as your fiance! Still can't believe I get to call you that ☺️<br>
                 Here is my cheesy line for Valentine’s: “Every second without you is a second too long.” (but it's true
                 though, can't wait to see you in March 😘)
             </p>
 
             <p id="traitsMessage" class="fade-in" style="display:none;">
-                I love you because your warmth and care light up my world, your strength inspires me every single day,
-                and the way you
-                challenge makes me want to be the best version of myself (and yes, you always hold me accountable when I
-                slip 😅). I can’t wait to build
-                our lives, our dreams, and countless memories together, hand in hand, forever.
+                Thank you for being you, for laughing at my bad jokes (and 🥴 at them too 😂), for letting me dream about our future,
+                and for being the most caring, thoughtful, and amazing person I’ve ever met.
+                I don't need a special day to tell you how much you mean to me, but Valentine's is a great excuse to say I Love You ❤️! 
+                I can’t wait to build our lives, our dreams, and countless memories together, hand in hand, forever.
             </p>
 
             <p id="jimPamMessage">
                 I’ll happily be the Jim to your Pam — today, tomorrow, and in every life we share after this one.
+                Yours truely, Roro ❤️
             </p>
 
-            <p style="margin-top:20px; font-size:26px;"><strong>Best Valentine ever ❤️✨</strong></p>
+            <p id="bestValentine" style="margin-top:20px; font-size:26px; opacity:0;"><strong>Best Valentine ever
+                    ❤️✨</strong></p>
         </div>
 
-        <div class="roses">
+        <div class="roses" id="roses" style="opacity:0;">
             <img src="https://em-content.zobj.net/source/apple/354/rose_1f339.png">
             <img src="https://em-content.zobj.net/source/apple/354/rose_1f339.png">
             <img src="https://em-content.zobj.net/source/apple/354/rose_1f339.png">
@@ -235,13 +246,14 @@
             <img src="https://em-content.zobj.net/source/apple/354/rose_1f339.png">
         </div>
 
-        <div class="spotify-container">
+        <div class="spotify-container" id="spotifyContainer">
             <p class="play-text">Press play 💋</p>
             <iframe class="spotify-iframe" src="https://open.spotify.com/embed/track/1q4BCQssFe74UJmnWt5lov"
                 allow="encrypted-media">
             </iframe>
+            <p class="disclaimer" id="spotifyDisclaimer">(Can’t add the full song here, so just use the player to open
+                the app, my love ❤️)</p>
         </div>
-
     </div>
 
     <script>
@@ -256,7 +268,6 @@
         ];
         let promptIndex = 0;
 
-        // No button static, same size as Yes
         noBtn.style.position = "relative";
         noBtn.style.padding = "20px 40px";
         noBtn.style.fontSize = "24px";
@@ -276,9 +287,21 @@
             setTimeout(() => { document.getElementById("pandaMessage").style.display = "block"; }, 500);
             setTimeout(() => { document.getElementById("storyMessage").style.display = "block"; }, 1500);
             setTimeout(() => { document.getElementById("traitsMessage").style.display = "block"; }, 2500);
+            setTimeout(() => { document.getElementById("jimPamMessage").style.display = "block"; }, 3500);
+
+            // Fade in elements after Jim & Pam
             setTimeout(() => {
-                document.getElementById("jimPamMessage").style.display = "block";
-            }, 3500);
+                document.getElementById("bestValentine").style.transition = "opacity 1s";
+                document.getElementById("bestValentine").style.opacity = 1;
+                document.getElementById("roses").style.transition = "opacity 1s";
+                document.getElementById("roses").style.opacity = 1;
+                document.getElementById("spotifyContainer").style.transition = "opacity 1s";
+                document.getElementById("spotifyContainer").style.opacity = 1;
+                document.getElementById("spotifyDisclaimer").style.transition = "opacity 1s";
+                document.getElementById("spotifyDisclaimer").style.opacity = 1;
+                document.querySelector(".play-text").style.transition = "opacity 1s";
+                document.querySelector(".play-text").style.opacity = 1;
+            }, 4000);
         }
 
         function startHearts() {
