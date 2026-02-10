@@ -2,12 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Be My Valentine?</title>
-
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-
     <style>
         body {
             background: linear-gradient(135deg, #ff9a9e, #fad0c4);
@@ -23,10 +20,10 @@
 
         .card {
             background: white;
-            padding: 40px;
-            border-radius: 25px;
+            padding: 60px;
+            border-radius: 30px;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-            max-width: 420px;
+            max-width: 600px;
             position: relative;
             z-index: 2;
             opacity: 1;
@@ -37,27 +34,37 @@
             display: none;
         }
 
-        h1,
-        h2 {
+        h1 {
+            font-size: 50px;
             color: #e63946;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 35px;
+            color: #e63946;
+            margin-bottom: 40px;
         }
 
         button {
-            padding: 12px 28px;
-            margin: 15px;
-            font-size: 18px;
-            border-radius: 30px;
+            padding: 20px 40px;
+            margin: 20px;
+            font-size: 24px;
+            border-radius: 40px;
             border: none;
             cursor: pointer;
             transition: transform 0.2s;
             position: relative;
         }
 
+        button:hover {
+            transform: scale(1.1);
+        }
+
         .yes {
             background: #e63946;
             color: white;
             position: relative;
-            /* stays in place */
         }
 
         .no {
@@ -66,8 +73,15 @@
             position: absolute;
         }
 
+        .prompt {
+            font-size: 22px;
+            color: #e63946;
+            margin-top: 20px;
+            min-height: 30px;
+        }
+
         .roses img {
-            width: 70px;
+            width: 80px;
             margin: 5px;
             animation: float 3s ease-in-out infinite;
         }
@@ -78,7 +92,7 @@
             }
 
             50% {
-                transform: translateY(-10px);
+                transform: translateY(-15px);
             }
 
             100% {
@@ -88,7 +102,7 @@
 
         .heart {
             position: fixed;
-            font-size: 20px;
+            font-size: 30px;
             animation: rise 5s linear infinite;
             z-index: 1;
         }
@@ -135,36 +149,73 @@
                 transform: translateY(0);
             }
         }
+
+        .message p {
+            font-size: 22px;
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+
+        .spotify-btn {
+            margin-top: 10px;
+            padding: 20px 40px;
+            font-size: 28px;
+            border-radius: 40px;
+            background: #1DB954;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: block;
+        }
+
+        .play-text {
+            font-size: 28px;
+            color: #e63946;
+            margin-top: 20px;
+        }
     </style>
 </head>
 
 <body>
 
+    <!-- Question Card -->
     <div class="card" id="questionCard">
         <h1>Jads 💖</h1>
         <h2>Will you be my Valentine?</h2>
 
         <button class="yes" onclick="sayYes()">Yes 💕</button>
         <button class="no" id="noBtn">No 🙃</button>
+
+        <div class="prompt" id="prompt"></div>
     </div>
 
+    <!-- Yes Card -->
     <div class="card hidden" id="yesCard">
         <h1>💘 It was always yes 💘</h1>
 
-        <!-- Valentine Message -->
-        <p id="pandaMessage" class="fade-in" style="margin-top:15px; font-size:18px; display:none;">
-            <strong>To my favourite panda 🐼❤️</strong>
-        </p>
+        <div class="message">
+            <p id="pandaMessage" class="fade-in" style="display:none;"><strong>To my favourite panda 🐼❤️</strong></p>
 
-        <p id="loveMessage" class="fade-in" style="font-size:16px; line-height:1.6; display:none;">
-            You’ve always been my safe place, my laugh, and my forever.
-        </p>
+            <p id="storyMessage" class="fade-in" style="display:none;">
+                You’ve been my safe place, my laugh, and my forever.<br>
+                We got engaged last December, and this is our first Valentine’s together.<br>
+                Here is my cheesy line for Valentine’s: “Every second without you is a second too long.” (but it's true
+                though, can't wait to see you in March 😘)
+            </p>
 
-        <p id="jimPamMessage" class="bounce" style="font-size:16px; margin-top:10px; display:none;">
-            I’ll happily be the Jim to your Pam — today, tomorrow, and every day after.
-        </p>
+            <p id="traitsMessage" class="fade-in" style="display:none;">
+                I love you because you are charasmatic, your strength inspires me every day, and the way
+                you challenge me makes me a better person. I can’t wait to build our lives and dreams together, hand in
+                hand, forever.
+            </p>
 
-        <p style="margin-top:10px;"><strong>Best Valentine ever ❤️✨</strong></p>
+            <p id="jimPamMessage" class="bounce" style="display:none;">
+                I’ll happily be the Jim to your Pam. Today, tomorrow, and in every life we share after this one.
+. 
+            </p>
+
+            <p style="margin-top:20px; font-size:26px;"><strong>Best Valentine ever ❤️✨</strong></p>
+        </div>
 
         <div class="roses">
             <img src="https://em-content.zobj.net/source/apple/354/rose_1f339.png">
@@ -174,41 +225,39 @@
             <img src="https://em-content.zobj.net/source/apple/354/rose_1f339.png">
         </div>
 
-        <p style="margin-top:20px;">Press play 💋</p>
+        <p class="play-text">Press play 💋</p>
+        <button class="spotify-btn" onclick="playSpotify()">▶ Play Lipstick by Charlie Puth</button>
 
-        <!-- Spotify Embed: fixed official embed -->
-        <iframe style="border-radius:12px; margin-top:10px"
-            src="https://open.spotify.com/embed/track/4dBGb2GkQO9c6R0kL2fKp8?utm_source=generator" width="100%"
-            height="80" frameborder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
-        </iframe>
     </div>
 
     <script>
         const noBtn = document.getElementById("noBtn");
+        const prompt = document.getElementById("prompt");
+        const prompts = [
+            "Are you sure? 😏",
+            "Still no? 🥺",
+            "Really really sure? 😅",
+            "Nope, try again 😘",
+            "This button doesn’t mean it 😂"
+        ];
+        let promptIndex = 0;
 
-        // Always move away from mouse smoothly
-        document.addEventListener("mousemove", function (e) {
-            const btnRect = noBtn.getBoundingClientRect();
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
+        // Smooth No button movement on hover
+        noBtn.addEventListener("mouseenter", moveNo);
+        noBtn.addEventListener("mouseover", moveNo);
 
-            // Distance to button center
-            const dx = mouseX - (btnRect.left + btnRect.width / 2);
-            const dy = mouseY - (btnRect.top + btnRect.height / 2);
-            const distance = Math.sqrt(dx * dx + dy * dy);
+        function moveNo() {
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            noBtn.style.transition = "transform 0.5s ease";
+            noBtn.style.transform = `translate(${newX - noBtn.getBoundingClientRect().left}px, ${newY - noBtn.getBoundingClientRect().top}px)`;
 
-            if (distance < 150) { // trigger radius
-                // Move button to random location within viewport
-                const maxX = window.innerWidth - btnRect.width - 20;
-                const maxY = window.innerHeight - btnRect.height - 20;
-
-                const newX = Math.random() * maxX;
-                const newY = Math.random() * maxY;
-
-                noBtn.style.transform = `translate(${newX - btnRect.left}px, ${newY - btnRect.top}px)`;
-            }
-        });
+            // Show playful prompt every time
+            prompt.innerText = prompts[promptIndex % prompts.length];
+            promptIndex++;
+        }
 
         function sayYes() {
             document.getElementById("questionCard").classList.add("hidden");
@@ -218,8 +267,9 @@
             startHearts();
 
             setTimeout(() => { document.getElementById("pandaMessage").style.display = "block"; }, 500);
-            setTimeout(() => { document.getElementById("loveMessage").style.display = "block"; }, 1500);
-            setTimeout(() => { document.getElementById("jimPamMessage").style.display = "block"; }, 2500);
+            setTimeout(() => { document.getElementById("storyMessage").style.display = "block"; }, 1500);
+            setTimeout(() => { document.getElementById("traitsMessage").style.display = "block"; }, 2500);
+            setTimeout(() => { document.getElementById("jimPamMessage").style.display = "block"; }, 3500);
         }
 
         function startHearts() {
@@ -232,6 +282,10 @@
                 document.body.appendChild(heart);
                 setTimeout(() => heart.remove(), 5000);
             }, 300);
+        }
+
+        function playSpotify() {
+            window.open("https://open.spotify.com/track/4dBGb2GkQO9c6R0kL2fKp8", "_blank");
         }
     </script>
 
