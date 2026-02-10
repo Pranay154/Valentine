@@ -50,11 +50,7 @@
             border: none;
             cursor: pointer;
             transition: transform 0.2s;
-            position: absolute;
-        }
-
-        button:hover {
-            transform: scale(1.1);
+            position: relative;
         }
 
         .yes {
@@ -67,6 +63,7 @@
         .no {
             background: #adb5bd;
             color: white;
+            position: absolute;
         }
 
         .roses img {
@@ -108,7 +105,6 @@
             }
         }
 
-        /* Fade-in and bounce animations for the Valentine message */
         .fade-in {
             opacity: 0;
             animation: fadeIn 1s forwards;
@@ -180,9 +176,10 @@
 
         <p style="margin-top:20px;">Press play 💋</p>
 
-        <!-- Spotify Embed: Charlie Puth – Lipstick -->
+        <!-- Spotify Embed: fixed official embed -->
         <iframe style="border-radius:12px; margin-top:10px"
-            src="https://open.spotify.com/embed/track/4dBGb2GkQO9c6R0kL2fKp8" width="100%" height="80" frameborder="0"
+            src="https://open.spotify.com/embed/track/4dBGb2GkQO9c6R0kL2fKp8?utm_source=generator" width="100%"
+            height="80" frameborder="0"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
         </iframe>
     </div>
@@ -190,24 +187,26 @@
     <script>
         const noBtn = document.getElementById("noBtn");
 
-        // Update button position based on mouse proximity
+        // Always move away from mouse smoothly
         document.addEventListener("mousemove", function (e) {
             const btnRect = noBtn.getBoundingClientRect();
             const mouseX = e.clientX;
             const mouseY = e.clientY;
 
-            // Distance between cursor and center of No button
+            // Distance to button center
             const dx = mouseX - (btnRect.left + btnRect.width / 2);
             const dy = mouseY - (btnRect.top + btnRect.height / 2);
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            // If cursor gets too close, move the button away
-            if (distance < 150) { // trigger distance
-                // Move in opposite direction, with magnitude increasing as mouse gets closer
-                const moveX = (dx / distance) * -200;
-                const moveY = (dy / distance) * -150;
+            if (distance < 150) { // trigger radius
+                // Move button to random location within viewport
+                const maxX = window.innerWidth - btnRect.width - 20;
+                const maxY = window.innerHeight - btnRect.height - 20;
 
-                noBtn.style.transform = `translate(${moveX + Math.random() * 50}px, ${moveY + Math.random() * 50}px)`;
+                const newX = Math.random() * maxX;
+                const newY = Math.random() * maxY;
+
+                noBtn.style.transform = `translate(${newX - btnRect.left}px, ${newY - btnRect.top}px)`;
             }
         });
 
@@ -218,18 +217,9 @@
 
             startHearts();
 
-            // Fade in the messages sequentially
-            setTimeout(() => {
-                document.getElementById("pandaMessage").style.display = "block";
-            }, 500);
-
-            setTimeout(() => {
-                document.getElementById("loveMessage").style.display = "block";
-            }, 1500);
-
-            setTimeout(() => {
-                document.getElementById("jimPamMessage").style.display = "block";
-            }, 2500);
+            setTimeout(() => { document.getElementById("pandaMessage").style.display = "block"; }, 500);
+            setTimeout(() => { document.getElementById("loveMessage").style.display = "block"; }, 1500);
+            setTimeout(() => { document.getElementById("jimPamMessage").style.display = "block"; }, 2500);
         }
 
         function startHearts() {
@@ -240,7 +230,6 @@
                 heart.style.left = Math.random() * 100 + "vw";
                 heart.style.animationDuration = 3 + Math.random() * 3 + "s";
                 document.body.appendChild(heart);
-
                 setTimeout(() => heart.remove(), 5000);
             }, 300);
         }
