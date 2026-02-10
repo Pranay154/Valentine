@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Be My Valentine?</title>
-    <!-- Updated font for readability -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -133,30 +132,33 @@
             }
         }
 
-        .bounce {
-            display: inline-block;
-            transform: translateY(0);
-            animation: bounce 0.6s forwards;
+        .message p {
+            font-size: 20px;
+            line-height: 1.8;
+            margin: 15px 0;
         }
 
-        @keyframes bounce {
+        /* Pulsating Jim & Pam message */
+        #jimPamMessage {
+            display: none;
+            font-size: 24px;
+            color: #e63946;
+            font-weight: 600;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
             0% {
-                transform: translateY(-20px);
+                transform: scale(1);
             }
 
             50% {
-                transform: translateY(10px);
+                transform: scale(1.15);
             }
 
             100% {
-                transform: translateY(0);
+                transform: scale(1);
             }
-        }
-
-        .message p {
-            font-size: 22px;
-            line-height: 1.8;
-            margin: 15px 0;
         }
 
         .spotify-container {
@@ -166,15 +168,12 @@
             margin-top: 20px;
         }
 
-        .spotify-btn {
-            padding: 20px 40px;
-            font-size: 28px;
-            border-radius: 40px;
-            background: #1DB954;
-            color: white;
+        .spotify-iframe {
+            width: 100%;
+            max-width: 400px;
+            height: 100px;
+            border-radius: 20px;
             border: none;
-            cursor: pointer;
-            display: block;
             margin-top: 10px;
         }
 
@@ -214,12 +213,14 @@
             </p>
 
             <p id="traitsMessage" class="fade-in" style="display:none;">
-                I love you because you are loving and caring, your strength inspires me every day, and you challenge me
-                to be the best version of myself (and hold me accountable when im not 🤣). I can’t wait to build our 
-                lives and dreams together, hand in hand, forever.
+                I love you because your warmth and care light up my world, your strength inspires me every single day,
+                and the way you
+                challenge makes me want to be the best version of myself (and yes, you always hold me accountable when I
+                slip 😅). I can’t wait to build
+                our lives, our dreams, and countless memories together, hand in hand, forever.
             </p>
 
-            <p id="jimPamMessage" class="bounce" style="display:none;">
+            <p id="jimPamMessage">
                 I’ll happily be the Jim to your Pam — today, tomorrow, and in every life we share after this one.
             </p>
 
@@ -236,7 +237,9 @@
 
         <div class="spotify-container">
             <p class="play-text">Press play 💋</p>
-            <button class="spotify-btn" onclick="playSpotify()">▶ Play 😉</button>
+            <iframe class="spotify-iframe" src="https://open.spotify.com/embed/track/1q4BCQssFe74UJmnWt5lov"
+                allow="encrypted-media">
+            </iframe>
         </div>
 
     </div>
@@ -273,7 +276,9 @@
             setTimeout(() => { document.getElementById("pandaMessage").style.display = "block"; }, 500);
             setTimeout(() => { document.getElementById("storyMessage").style.display = "block"; }, 1500);
             setTimeout(() => { document.getElementById("traitsMessage").style.display = "block"; }, 2500);
-            setTimeout(() => { document.getElementById("jimPamMessage").style.display = "block"; }, 3500);
+            setTimeout(() => {
+                document.getElementById("jimPamMessage").style.display = "block";
+            }, 3500);
         }
 
         function startHearts() {
@@ -286,10 +291,6 @@
                 document.body.appendChild(heart);
                 setTimeout(() => heart.remove(), 5000);
             }, 300);
-        }
-
-        function playSpotify() {
-            window.open("https://open.spotify.com/track/1q4BCQssFe74UJmnWt5lov", "_blank");
         }
     </script>
 
