@@ -66,13 +66,11 @@
         .yes {
             background: #e63946;
             color: white;
-            position: relative;
         }
 
         .no {
             background: #adb5bd;
             color: white;
-            position: relative;
         }
 
         .prompt {
@@ -133,7 +131,7 @@
         }
 
         .message p {
-            font-size: 20px;
+            font-size: 18px;
             line-height: 1.8;
             margin: 15px 0;
         }
@@ -188,9 +186,22 @@
         .disclaimer {
             font-size: 14px;
             color: #555;
-            margin-top: 10px;
+            margin-top: 5px;
             text-align: center;
             opacity: 0;
+        }
+
+        .spotify-link button {
+            padding: 12px 28px;
+            font-size: 18px;
+            border-radius: 30px;
+            background: #1DB954;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 8px;
+            opacity: 0;
+            transition: opacity 1s;
         }
     </style>
 </head>
@@ -217,21 +228,21 @@
 
             <p id="storyMessage" class="fade-in" style="display:none;">
                 You’ve always been my safe place, my laugh, and my forever.<br>
-                Our first Valentine’s together as your fiance! Still can't believe I get to call you that ☺️<br>
+                We got engaged last December, and this is our first Valentine’s together.<br>
                 Here is my cheesy line for Valentine’s: “Every second without you is a second too long.” (but it's true
                 though, can't wait to see you in March 😘)
             </p>
 
             <p id="traitsMessage" class="fade-in" style="display:none;">
-                Thank you for being you, for laughing at my bad jokes (and 🥴 at them too 😂), for letting me dream about our future,
-                and for being the most caring, thoughtful, and amazing person I’ve ever met.
-                I don't need a special day to tell you how much you mean to me, but Valentine's is a great excuse to say I Love You ❤️! 
-                I can’t wait to build our lives, our dreams, and countless memories together, hand in hand, forever.
+                I love you because your warmth and care light up my world, your strength inspires me every single day,
+                and the way you
+                challenge makes me want to be the best version of myself (and yes, you always hold me accountable when I
+                slip 😅). I can’t wait to build
+                our lives, our dreams, and countless memories together, hand in hand, forever.
             </p>
 
             <p id="jimPamMessage">
                 I’ll happily be the Jim to your Pam — today, tomorrow, and in every life we share after this one.
-                Yours truly, Roro ❤️
             </p>
 
             <p id="bestValentine" style="margin-top:20px; font-size:26px; opacity:0;"><strong>Best Valentine ever
@@ -251,8 +262,15 @@
             <iframe class="spotify-iframe" src="https://open.spotify.com/embed/track/1q4BCQssFe74UJmnWt5lov"
                 allow="encrypted-media">
             </iframe>
-            <p class="disclaimer" id="spotifyDisclaimer">(Can’t add the full song here, so just use the player to open
-                the app my love ❤️)</p>
+            <p class="disclaimer" id="spotifyDisclaimer">
+                (Can’t add the full song here, so just <a href="https://open.spotify.com/track/1q4BCQssFe74UJmnWt5lov"
+                    target="_blank" style="color:#1DB954; text-decoration:none;">open it in Spotify</a>, my love ❤️)
+            </p>
+            <div class="spotify-link">
+                <a href="https://open.spotify.com/track/1q4BCQssFe74UJmnWt5lov" target="_blank">
+                    <button>Open in Spotify 🎵</button>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -291,14 +309,19 @@
 
             // Fade in elements after Jim & Pam
             setTimeout(() => {
-                document.getElementById("bestValentine").style.transition = "opacity 1s";
-                document.getElementById("bestValentine").style.opacity = 1;
-                document.getElementById("roses").style.transition = "opacity 1s";
-                document.getElementById("roses").style.opacity = 1;
-                document.getElementById("spotifyContainer").style.transition = "opacity 1s";
-                document.getElementById("spotifyContainer").style.opacity = 1;
-                document.getElementById("spotifyDisclaimer").style.transition = "opacity 1s";
-                document.getElementById("spotifyDisclaimer").style.opacity = 1;
+                const fadeElements = [
+                    "bestValentine",
+                    "roses",
+                    "spotifyContainer",
+                    "spotifyDisclaimer"
+                ];
+                fadeElements.forEach(id => {
+                    const el = document.getElementById(id) || document.querySelector("#spotifyContainer .spotify-link button");
+                    if (el) {
+                        el.style.transition = "opacity 1s";
+                        el.style.opacity = 1;
+                    }
+                });
                 document.querySelector(".play-text").style.transition = "opacity 1s";
                 document.querySelector(".play-text").style.opacity = 1;
             }, 4000);
