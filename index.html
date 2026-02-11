@@ -191,17 +191,32 @@
             opacity: 0;
         }
 
-        .spotify-link button {
-            padding: 12px 28px;
-            font-size: 18px;
-            border-radius: 30px;
-            background: #1DB954;
-            color: white;
-            border: none;
-            cursor: pointer;
+        .spotify-link {
             margin-top: 8px;
             opacity: 0;
-            transition: opacity 1s;
+        }
+
+        .spotify-link a {
+            color: #1DB954;
+            text-decoration: underline;
+            font-size: 18px;
+            font-weight: 600;
+            display: inline-block;
+            animation: bounceLink 1.5s infinite;
+        }
+
+        @keyframes bounceLink {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -263,13 +278,10 @@
                 allow="encrypted-media">
             </iframe>
             <p class="disclaimer" id="spotifyDisclaimer">
-                (Can’t add the full song here, so just <a href="https://open.spotify.com/track/1q4BCQssFe74UJmnWt5lov"
-                    target="_blank" style="color:#1DB954; text-decoration:none;">open it in Spotify</a>, my love ❤️)
+                (Can’t add the full song here, so just open it in Spotify my love ❤️)
             </p>
             <div class="spotify-link">
-                <a href="https://open.spotify.com/track/1q4BCQssFe74UJmnWt5lov" target="_blank">
-                    <button>Open in Spotify 🎵</button>
-                </a>
+                <a href="https://open.spotify.com/track/1q4BCQssFe74UJmnWt5lov" target="_blank">Open in Spotify 🎵</a>
             </div>
         </div>
     </div>
@@ -314,14 +326,12 @@
                     "bestValentine",
                     "roses",
                     "spotifyContainer",
-                    "spotifyDisclaimer"
+                    "spotifyDisclaimer",
+                    "spotifyContainer"
                 ];
                 fadeElements.forEach(id => {
-                    const el = document.getElementById(id) || document.querySelector("#spotifyContainer .spotify-link button");
-                    if (el) {
-                        el.style.transition = "opacity 1s";
-                        el.style.opacity = 1;
-                    }
+                    const el = document.getElementById(id) || document.querySelector(".spotify-link a");
+                    if (el) { el.style.transition = "opacity 1s"; el.style.opacity = 1; }
                 });
                 document.querySelector(".play-text").style.transition = "opacity 1s";
                 document.querySelector(".play-text").style.opacity = 1;
