@@ -193,16 +193,19 @@
 
         .spotify-link {
             margin-top: 8px;
-            opacity: 0;
         }
 
         .spotify-link a {
             color: #1DB954;
+            /* Spotify green */
             text-decoration: underline;
             font-size: 18px;
             font-weight: 600;
             display: inline-block;
+            opacity: 0;
+            /* Will fade in */
             animation: bounceLink 1.5s infinite;
+            transition: opacity 1s;
         }
 
         @keyframes bounceLink {
@@ -281,7 +284,9 @@
                 (Can’t add the full song here, so just open it in Spotify my love ❤️)
             </p>
             <div class="spotify-link">
-                <a href="https://open.spotify.com/track/1q4BCQssFe74UJmnWt5lov" target="_blank">Open in Spotify 🎵</a>
+                <a href="https://open.spotify.com/track/1q4BCQssFe74UJmnWt5lov" target="_blank" id="spotifyLink">
+                    Open in Spotify 🎵
+                </a>
             </div>
         </div>
     </div>
@@ -327,7 +332,7 @@
                     "roses",
                     "spotifyContainer",
                     "spotifyDisclaimer",
-                    "spotifyContainer"
+                    "spotifyLink"
                 ];
                 fadeElements.forEach(id => {
                     const el = document.getElementById(id) || document.querySelector(".spotify-link a");
