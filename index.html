@@ -374,13 +374,16 @@
                     "bestValentine",
                     "roses",
                     "spotifyContainer",
-                    "spotifyDisclaimer",
-                    "spotifyLink",
+                    "spotifyTrackDisclaimer",
+                    "spotifyTrackLink",
+                    "spotifyPlaylistDisclaimer",
+                    "spotifyPlaylistLink",
                     "playlistSection"
                 ];
                 fadeElements.forEach(id => {
                     const el = document.getElementById(id);
-                    if (el) { el.style.transition = "opacity 1s"; el.style.opacity = 1; }
+                    if (el) el.style.transition = "opacity 1s";
+                    if (el) el.style.opacity = 1;
                 });
                 document.querySelector(".play-text").style.opacity = 1;
             }, 4000);
