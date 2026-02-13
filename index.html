@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <title>Be My Valentine?</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Confetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
         body {
             background: linear-gradient(135deg, #ff9a9e, #fad0c4);
@@ -197,13 +201,11 @@
 
         .spotify-link a {
             color: #1DB954;
-            /* Spotify green */
             text-decoration: none;
             font-size: 18px;
             font-weight: 600;
             display: inline-block;
             opacity: 0;
-            /* Will fade in */
             animation: bounceLink 1.5s infinite;
             transition: opacity 1s;
         }
@@ -220,6 +222,12 @@
             100% {
                 transform: translateY(0);
             }
+        }
+
+        /* Playlist */
+        .playlist-section iframe {
+            border-radius: 20px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -275,6 +283,7 @@
             <img src="https://em-content.zobj.net/source/apple/354/rose_1f339.png">
         </div>
 
+        <!-- Lipstick Spotify Section -->
         <div class="spotify-container" id="spotifyContainer">
             <p class="play-text">Press play 💋</p>
             <iframe class="spotify-iframe" src="https://open.spotify.com/embed/track/1q4BCQssFe74UJmnWt5lov"
@@ -288,6 +297,17 @@
                     Open in Spotify 🎵
                 </a>
             </div>
+        </div>
+
+        <!-- Playlist Section -->
+        <div class="playlist-section" id="playlistSection" style="opacity:0; margin-top:40px;">
+            <h2 style="font-size:22px; color:#e63946;">Our Playlist 💕</h2>
+            <iframe src="https://open.spotify.com/embed/playlist/29dPqf3uRaeQ5vkoQ5BM5x" width="100%" height="380"
+                frameborder="0" allow="encrypted-media">
+            </iframe>
+            <p style="font-size:14px; color:#555; margin-top:8px;">
+                Songs that remind me of us ❤️
+            </p>
         </div>
     </div>
 
@@ -313,7 +333,20 @@
             promptIndex++;
         });
 
+        // 🎉 Confetti Function
+        function fireConfetti() {
+            const duration = 2000;
+            const end = Date.now() + duration;
+            (function frame() {
+                confetti({ particleCount: 6, angle: 60, spread: 70, origin: { x: 0 } });
+                confetti({ particleCount: 6, angle: 120, spread: 70, origin: { x: 1 } });
+                if (Date.now() < end) requestAnimationFrame(frame);
+            })();
+        }
+
         function sayYes() {
+            fireConfetti(); // 🎉
+
             document.getElementById("questionCard").classList.add("hidden");
             const yesCard = document.getElementById("yesCard");
             yesCard.classList.remove("hidden");
@@ -325,20 +358,20 @@
             setTimeout(() => { document.getElementById("traitsMessage").style.display = "block"; }, 2500);
             setTimeout(() => { document.getElementById("jimPamMessage").style.display = "block"; }, 3500);
 
-            // Fade in elements after Jim & Pam
+            // Fade in everything after Jim & Pam
             setTimeout(() => {
                 const fadeElements = [
                     "bestValentine",
                     "roses",
                     "spotifyContainer",
                     "spotifyDisclaimer",
-                    "spotifyLink"
+                    "spotifyLink",
+                    "playlistSection"
                 ];
                 fadeElements.forEach(id => {
-                    const el = document.getElementById(id) || document.querySelector(".spotify-link a");
+                    const el = document.getElementById(id);
                     if (el) { el.style.transition = "opacity 1s"; el.style.opacity = 1; }
                 });
-                document.querySelector(".play-text").style.transition = "opacity 1s";
                 document.querySelector(".play-text").style.opacity = 1;
             }, 4000);
         }
